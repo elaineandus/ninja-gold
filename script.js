@@ -35,7 +35,7 @@ function updatetotalGold(value) {
     if (totalGold >= 250 && attempt === 0) {
       Message('Congratulations! You completed the game!', 'green');
     } else if (attempt === 0 && totalGold < 250) {
-      Message('Game over! You ran out of attempts.', 'red');
+      Message('Game over! You ran out of attempts. Try Again.', 'red');
     }
   }
   
@@ -45,12 +45,14 @@ function Message(message, color) {
     $('#message').css('color', color);
 }
 
-function addToLog(date, time, location, gold) {
-    let logEntry = `<p>Amount:   ${gold} <br>Time: ${time}
-    <br>Location: ${location}`;
-    $('#log-container').prepend(logEntry);
-}
+let logCounter = 1;
 
+function addToLog(time, location, gold) {
+    let logEntry = `<p style="padding-left: 1rem;"><span style="font-weight: bold;">${logCounter}. Amount:</span> ${gold} <br><span style="font-weight: bold;">Time:</span> ${time} <br><span style="font-weight: bold;">Location:</span> ${location}</p><hr style="border-top: 1px solid gray;">`;
+    $('#log-container').prepend(logEntry);
+    logCounter++;
+}
+  
 function resetGame() {
     attempt = 20;
     totalGold = 0;
@@ -69,16 +71,16 @@ $('#cave').click(function() {
         let gold = 5;
         updateattempt();
         updatetotalGold(gold);
-        addToLog(new Date().toLocaleDateString(), new Date().toLocaleTimeString(), 'Cave', gold);
-        Message(`You earned ${gold} gold from the Cave.`, 'green');
+        addToLog( new Date().toLocaleTimeString(), 'Cave', gold);
+        Message(`+You earned ${gold} gold from the Cave.`, 'green');
             } else {
                 Message(`ou ran out of attempts.`, 'red');
                 if (totalGold >= 250 && attempt === 0) {
                     Message('Congratulations! You completed the game!', 'green');
                 } else if (attempt === 0 && totalGold < 250) {
-                    Message('Game over! You ran out of attempts.', 'red');
+                    Message('Game over! You ran out of attempts. Try Again.', 'red');
                 }
-    }
+        }
 });
 
 $('#casino').click(function() {
@@ -87,20 +89,20 @@ $('#casino').click(function() {
         updateattempt();
         updatetotalGold(gold);
         if (gold < 0) {
-            addToLog(new Date().toLocaleDateString(), new Date().toLocaleTimeString(), 'Casino', gold);
-            Message(`You lost ${Math.abs(gold)} gold at the Casino.`, 'red');
+            addToLog( new Date().toLocaleTimeString(), 'Casino', gold);
+            Message(`-You lost ${Math.abs(gold)} gold at the Casino.`, 'red');
         } else {
-            addToLog(new Date().toLocaleDateString(), new Date().toLocaleTimeString(), 'Casino', gold);
-            Message(`You earned ${gold} gold from the Casino.`, 'green');
+            addToLog( new Date().toLocaleTimeString(), 'Casino', gold);
+            Message(`+You earned ${gold} gold from the Casino.`, 'green');
         }
             } else {
                 Message(`ou ran out of attempts.`, 'red');
             if (totalGold >= 250 && attempt === 0) {
                 Message('Congratulations! You completed the game!', 'green');
             } else if (attempt === 0 && totalGold < 250) {
-                Message('Game over! You ran out of attempts.', 'red');
+                Message('Game over! You ran out of attempts. Try Again.', 'red');
             }
-    }
+        }
 });
 
 $('#house').click(function() {
@@ -108,14 +110,14 @@ $('#house').click(function() {
         let gold = Math.random() < 0.8 ? 10 : 0;
         updateattempt();
         updatetotalGold(gold);
-        addToLog(new Date().toLocaleDateString(), new Date().toLocaleTimeString(), 'House', gold);
-        Message(`You earned ${gold} gold from the House.`, 'green');
+        addToLog( new Date().toLocaleTimeString(), 'House', gold);
+        Message(`+You earned ${gold} gold from the House.`, 'green');
             } else {
                 Message('ou ran out of attempts.', 'red');
                 if (totalGold >= 250 && attempt === 0) {
                     Message('Congratulations! You completed the game!', 'green');
                 } else if (attempt === 0 && totalGold < 250) {
-                    Message('Game over! You ran out of attempts.', 'red');
+                    Message('Game over! You ran out of attempts. Try Again.', 'red');
                 }
         }
 });
@@ -125,20 +127,20 @@ $('#goldmine').click(function() {
         let gold = Math.random() < 0.8 ? generateGold(1, 25) : 0;
         updateattempt();
         updatetotalGold(gold);
-        addToLog(new Date().toLocaleDateString(), new Date().toLocaleTimeString(), 'Goldmine', gold);
-        Message(`You earned ${gold} gold from the Goldmine.`, 'green');
+        addToLog( new Date().toLocaleTimeString(), 'Goldmine', gold);
+        Message(`+You earned ${gold} gold from the Goldmine.`, 'green');
             } else {
                 Message(`ou ran out of attempts.`, 'red');
                 if (totalGold >= 250 && attempt === 0) {
                     Message('Congratulations! You completed the game!', 'green');
                 } else if (attempt === 0 && totalGold < 250) {
-                    Message('Game over! You ran out of attempts.', 'red');
+                    Message('Game over! You ran out of attempts. Try Again.', 'red');
             }
-    }
+        }
 });
 
 $("#cave").click(function(){
-    $("#ninja").animate({marginLeft: "-400px", marginTop: "-100px"}, 500, function(){
+    $("#ninja").animate({marginLeft: "-450px", marginTop: "-100px"}, 500, function(){
     $(this).css({marginLeft: 0, marginTop: 0});
     });
     });
@@ -160,3 +162,33 @@ $("#goldmine").click(function(){
     $(this).css({marginRight: 0, marginTop: 0});
     });
     });
+
+var logContainer = document.getElementById('log-container');
+
+// Get the log button element
+var logButton = document.getElementById('log-btn');
+
+// Check if the modal was previously shown
+var modalShown = localStorage.getItem('modalShown');
+
+// If the modal was previously shown, show the log container and remove the fade class
+if (modalShown === 'true') {
+  logContainer.style.display = 'block';
+  document.querySelector('.modal-backdrop').classList.remove('fade');
+}
+
+// Add an event listener to the log button
+logButton.addEventListener('click', function () {
+  // Show the log container and remove the fade class
+  logContainer.style.display = 'block';
+  document.querySelector('.modal-backdrop').classList.remove('fade');
+  
+  // Set the modalShown flag in localStorage to true
+  localStorage.setItem('modalShown', 'true');
+});
+
+// Add an event listener to the modal hide event
+$('#exampleModalCenter').on('hide.bs.modal', function (e) {
+  // Set the modalShown flag in localStorage to false
+  localStorage.setItem('modalShown', 'false');
+});

@@ -1,61 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Ninja Gold</title>
-    <link rel="icon" href="img/ninja.png"/>
-    <link rel="stylesheet" href="css/game.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ninja Gold</title>
+  <link rel="icon" href="./img/ninja.png"/>
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="head">
+    <h1><img src="./img/gold-bars.png" alt="">Ninja Gold<img src="./img/gold-bars.png" alt=""></h1>
+    <h3>by: Elaine S. Andus</h3>
+
+    <div class="sub-head">
+      <div class="score">
+        <p>Total Gains: <span id="totalGains">0</span></p>
+        <p>Total Loss: <span id="totalLosses">0</span></p>
+      </div>
+      <div class="score">
+        <p>Attempts: <span id="attempts">20</span></p>
+        <p>Total Gold: <span id="totalGold">0</span></p>
+      </div>
+      <div class="score">
+        <p><button id="reset" class="btn btn-danger" onclick="resetGame()">Reset Game</button></p>
+        <p><button class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter" id="log-btn">Log History</button></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="message"></div>
+
+  <div class="outer-container">
+
     <div class="container">
-        <div id="game-container">
-            <div class="game-title">
-                <h1>NINJA GOLD</h1>
-            </div>
 
-            <div id="log-container-2">
-                <div id="summary-tab" style="color: white;">
-                  <p>Total Gains: <span id="totalGains" >0</span></p>
-                  <p>Total Loss: <span id="totalLosses">0</span></p>
-                </div>
-              </div>
-
-            <div id="container">
-                <span>Attempts: <span id="attempts">20</span></span>
-                <span>Total Gold: <span id="totalGold">0</span></span>
-                <button id="reset" class="btn btn-danger" onclick="resetGame()">Reset Game</button>
-                <button class="btn btn-secondary"> Log History</button>
-            </div>
-            
-            <div class="locations">
-                <div class="d-flex justify-content-around position-relative m-4">
-                <button class="location-btn" id="cave"><span>Cave </span> <img src="./img/cave.png" alt=""></button>
-                
-                <button class="location-btn" id="casino"><span>Casino </span> <img src="./img/casino.png" alt=""></button>
-                
-                <button class="location-btn" id="house"><span>House </span> <img src="./img/house.png" alt=""></button>
-                
-                <button class="location-btn" id="goldmine"><span>Goldmine </span> <img src="./img/goldmine.png" alt=""></button>
-                        
-                </div>
-                
-                <div class="d-flex justify-content-center position-relative">
-                    <img id="ninja" src="./img/character.gif" alt="" class="img-fluid">
-                </div>
-            </div> 
-                <div id="message" class="d-flex justify-content-center mx-auto"></div>
+      <div class="location" id="cave">
+        <div class="specific-loc">
+          <p>CAVE</p>
+          <img src="./img/cave.png" alt="">
         </div>
+      </div>
 
-        <div id="log-container">
+      <div class="location" id="casino">
+        <div class="specific-loc">
+          <p>CASINO</p>
+          <img src="./img/casino.png" alt="">
         </div>
-          
-          
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="script.js"></script>
+      </div>
+
+      <div class="location" id="house">
+        <div class="specific-loc">
+          <p>HOUSE</p>
+          <img src="./img/house.png" alt="">
+        </div>
+      </div>
+
+      <div class="location" id="goldmine">
+        <div class="specific-loc">
+          <p>GOLDMINE</p>
+          <img src="./img/goldmine.png" alt="">
+        </div>
+      </div>
 
     </div>
+
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Log History</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close-btn">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id="log-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ninja">
+    <img id="ninja" src="./img/character.gif" alt="" class="img-fluid">
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="script.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </body>
 </html>
