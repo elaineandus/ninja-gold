@@ -64,6 +64,7 @@ function resetGame() {
     $('#totalLosses').text(totalLosses);
     $('#log-container').empty();
     $('#message').empty();
+    logCounter = 1; // Reset logCounter variable
 }
 
 $('#cave').click(function() {
