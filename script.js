@@ -75,7 +75,7 @@ $('#cave').click(function() {
         addToLog( new Date().toLocaleTimeString(), 'Cave', gold);
         Message(`+You earned ${gold} gold from the Cave.`, 'green');
             } else {
-                Message(`ou ran out of attempts.`, 'red');
+                Message(`You ran out of attempts.`, 'red');
                 if (totalGold >= 250 && attempt === 0) {
                     Message('Congratulations! You completed the game!', 'green');
                 } else if (attempt === 0 && totalGold < 250) {
@@ -97,7 +97,7 @@ $('#casino').click(function() {
             Message(`+You earned ${gold} gold from the Casino.`, 'green');
         }
             } else {
-                Message(`ou ran out of attempts.`, 'red');
+                Message(`You ran out of attempts.`, 'red');
             if (totalGold >= 250 && attempt === 0) {
                 Message('Congratulations! You completed the game!', 'green');
             } else if (attempt === 0 && totalGold < 250) {
@@ -114,7 +114,7 @@ $('#house').click(function() {
         addToLog( new Date().toLocaleTimeString(), 'House', gold);
         Message(`+You earned ${gold} gold from the House.`, 'green');
             } else {
-                Message('ou ran out of attempts.', 'red');
+                Message('You ran out of attempts.', 'red');
                 if (totalGold >= 250 && attempt === 0) {
                     Message('Congratulations! You completed the game!', 'green');
                 } else if (attempt === 0 && totalGold < 250) {
@@ -131,7 +131,7 @@ $('#goldmine').click(function() {
         addToLog( new Date().toLocaleTimeString(), 'Goldmine', gold);
         Message(`+You earned ${gold} gold from the Goldmine.`, 'green');
             } else {
-                Message(`ou ran out of attempts.`, 'red');
+                Message(`You ran out of attempts.`, 'red');
                 if (totalGold >= 250 && attempt === 0) {
                     Message('Congratulations! You completed the game!', 'green');
                 } else if (attempt === 0 && totalGold < 250) {
