@@ -172,4 +172,16 @@ ul.navbar li a:hover:not(.active){
     .ninja{
       display: none;
     }
+    .content-desc p{
+      width: auto;
+    }
+    .logo p{
+        width: 120px;
+        /* width: 130px; */
+        /* margin-left: 10px; */
+        /* font-size: 20px; */
+    }
+    .logo .fas{
+        font-size: 50px;
+    }
   }
